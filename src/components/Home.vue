@@ -1,26 +1,10 @@
 <template>
-  <div class="hello">
+  <div class="c-home">
     <navbar></navbar>
 
     <section class="section">
       <div class="container">
-        <h1 class="title">Section</h1>
-        <h2 class="subtitle">
-          {{ msg }}
-        </h2>
-
-        <div class="content">
-          <p>{{ count }}</p>
-        </div>
-
-        <div class="field has-addons">
-          <p class="control">
-            <button class="button" @click="increment">+</button>
-          </p>
-          <p class="control">
-            <button class="button" @click="decrement">-</button>
-          </p>
-        </div>
+        <items></items>
       </div>
     </section>
   </div>
@@ -28,29 +12,28 @@
 
 <script>
   import Navbar from './Navbar.vue'
+  import Items from './Items.vue'
 
   export default {
-    name: 'hello',
+    name: 'home',
     components: {
+      Items,
       Navbar
-    },
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js PWA'
-      }
-    },
-    computed: {
-      count () {
-        return this.$store.state.counters.main
-      }
-    },
-    methods: {
-      increment () {
-        this.$store.commit('INCREMENT_MAIN_COUNTER')
-      },
-      decrement () {
-        this.$store.commit('DECREMENT_MAIN_COUNTER')
-      }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "~bulma/sass/utilities/initial-variables";
+
+  .c-home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .section {
+    flex: 1;
+    background-color: $white-ter;
+  }
+</style>
