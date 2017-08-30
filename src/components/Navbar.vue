@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item" href="http://bulma.io">
-          Vlinks
+          <img src="../assets/logo.png" alt="Vue.js PWA">
         </a>
 
         <div class="navbar-burger burger" data-target="c-navbar__menu">
