@@ -16,19 +16,29 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
           </p>
         </div>
-        <nav class="level is-mobile">
-          <div class="level-left">
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-reply"></i></span>
-            </a>
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-            </a>
-            <a class="level-item">
-              <span class="icon is-small"><i class="fa fa-heart"></i></span>
-            </a>
+
+        <div class="columns">
+          <div class="column is-narrow">
+            <nav class="level is-mobile" style="height: 100%">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fa fa-pencil"></i></span>
+                </a>
+                <a class="level-item" @click="deleteItem">
+                  <span class="icon is-small"><i class="fa fa-trash-o"></i></span>
+                </a>
+              </div>
+            </nav>
           </div>
-        </nav>
+
+          <div class="column">
+            <div class="tags">
+              <span class="tag">One</span>
+              <span class="tag">Two</span>
+              <span class="tag">Three</span>
+            </div>
+          </div>
+        </div>
       </div>
     </article>
   </div>
@@ -36,6 +46,14 @@
 
 <script>
   export default {
-    name: 'item'
+    name: 'item',
+    methods: {
+      deleteItem () {
+        let canDelete = confirm('Are you sure you want to delete this link?')
+        if (canDelete) {
+          console.log('Item deleted')
+        }
+      }
+    }
   }
 </script>

@@ -16,7 +16,12 @@
       return {
         items: [
           {
-            title: 'Item #1'
+            title: 'Item #1',
+            url: 'https://example.com',
+            description: 'Description',
+            tags: ['test'],
+            isPrivate: false,
+            addDate: '2017-08-31T02::10:00Z'
           },
           {
             title: 'Item #2'
