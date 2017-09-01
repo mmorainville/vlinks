@@ -1,14 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import Items from '@/components/Items'
+import ItemForm from '@/components/ItemForm'
+import Item from '@/components/Item'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Home',
+      component: Home,
+      children: [
+        {
+          path: '',
+          name: 'Home',
+          component: Items
+        },
+        {
+          path: '/item-form',
+          name: 'ItemForm',
+          component: ItemForm
+        },
+        {
+          path: '/item/:id',
+          name: 'Item',
+          component: Item,
+          props: true
+        }
+      ]
+    },
+    {
+      path: '*',
       component: Home
     }
   ]

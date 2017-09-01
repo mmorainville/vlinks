@@ -2,9 +2,9 @@
   <nav class="navbar has-shadow">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="http://bulma.io">
+        <router-link class="navbar-item" to="/" exact>
           <img src="../assets/logo.png" alt="Vue.js PWA">
-        </a>
+        </router-link>
 
         <div class="navbar-burger burger" data-target="c-navbar__menu">
           <span></span>
@@ -15,9 +15,9 @@
 
       <div id="c-navbar__menu" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="https://github.com/jgthms/bulma" target="_blank">
-            About
-          </a>
+          <router-link class="navbar-item" to="/item-form" exact>
+            Item form
+          </router-link>
         </div>
 
         <div class="navbar-end">

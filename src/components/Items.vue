@@ -21,7 +21,7 @@
             description: 'Description',
             tags: ['test'],
             isPrivate: false,
-            addDate: '2017-08-31T02::10:00Z'
+            addDate: '2017-08-31T02:10'
           },
           {
             title: 'Item #2'
