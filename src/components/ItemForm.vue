@@ -1,5 +1,7 @@
 <template>
   <div class="c-item-form">
+    <!--<pre>{{ item }}</pre>-->
+
     <div class="box">
       <div class="field">
         <label class="label">Title</label>
@@ -71,13 +73,21 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
+  const uuidv4 = require('uuid/v4')
+
   let timezoneOffset = (new Date()).getTimezoneOffset() * 60000
 
   export default {
     name: 'item-form',
+    computed: {
+      ...mapState(['items'])
+    },
     data () {
       return {
         item: {
+          id: uuidv4(),
           title: this.$route.query.title ? this.$route.query.title : '',
           url: this.$route.query.url ? this.$route.query.url : '',
           description: this.$route.query.description ? this.$route.query.description : '',
@@ -86,6 +96,11 @@
           addDate: (new Date(Date.now() - timezoneOffset)).toISOString().substring(0, 16)
         },
         tag: ''
+      }
+    },
+    mounted () {
+      if (this.$route.query.id && this.items[this.$route.query.id]) {
+        this.item = JSON.parse(JSON.stringify(this.items[this.$route.query.id]))
       }
     },
     methods: {

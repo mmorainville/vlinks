@@ -16,7 +16,7 @@
       <div id="c-navbar__menu" class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item" to="/item-form" exact>
-            Item form
+            Add link
           </router-link>
         </div>
 

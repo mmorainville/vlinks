@@ -21,7 +21,7 @@
           <div class="column is-narrow">
             <nav class="level is-mobile" style="height: 100%">
               <div class="level-left">
-                <a class="level-item">
+                <a class="level-item" @click="editItem">
                   <span class="icon is-small"><i class="fa fa-pencil"></i></span>
                 </a>
                 <a class="level-item" @click="deleteItem">
@@ -45,9 +45,21 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'item',
+    props: ['id'],
+    computed: {
+      ...mapState(['items'])
+    },
+    mounted () {
+      console.log(this.items[this.id])
+    },
     methods: {
+      editItem () {
+        this.$router.push({path: '/item-form', query: {id: 'test'}})
+      },
       deleteItem () {
         let canDelete = confirm('Are you sure you want to delete this link?')
         if (canDelete) {

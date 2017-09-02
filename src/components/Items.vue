@@ -1,10 +1,11 @@
 <template>
   <div class="c-items">
-    <item v-for="item in items" :key="item.title"></item>
+    <item v-for="(item, key)  in items" :key="item.id"></item>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import Item from './Item.vue'
 
   export default {
@@ -12,25 +13,6 @@
     components: {
       Item
     },
-    data () {
-      return {
-        items: [
-          {
-            title: 'Item #1',
-            url: 'https://example.com',
-            description: 'Description',
-            tags: ['test'],
-            isPrivate: false,
-            addDate: '2017-08-31T02:10'
-          },
-          {
-            title: 'Item #2'
-          },
-          {
-            title: 'Item #3'
-          }
-        ]
-      }
-    }
+    computed: mapState(['items'])
   }
 </script>
