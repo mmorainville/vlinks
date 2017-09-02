@@ -62,7 +62,7 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-primary">Submit</button>
+          <button class="button is-primary" @click="saveItem">Submit</button>
         </div>
         <div class="control">
           <button class="button is-link">Cancel</button>
@@ -74,6 +74,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import * as types from '@/store/mutation-types'
 
   const uuidv4 = require('uuid/v4')
 
@@ -90,7 +91,7 @@
           id: uuidv4(),
           title: this.$route.query.title ? this.$route.query.title : '',
           url: this.$route.query.url ? this.$route.query.url : '',
-          description: this.$route.query.description ? this.$route.query.description : '',
+          description: '',
           tags: [],
           isPrivate: false,
           addDate: (new Date(Date.now() - timezoneOffset)).toISOString().substring(0, 16)
@@ -114,6 +115,10 @@
         if (index > -1) {
           this.item.tags.splice(index, 1)
         }
+      },
+      saveItem () {
+        this.$store.commit(types.SAVE_ITEM, this.item)
+        this.$router.push('/')
       }
     }
   }

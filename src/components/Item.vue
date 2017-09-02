@@ -9,11 +9,12 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>John Smith</strong>
-            <small>@johnsmith</small>
-            <small>31m</small>
+            <strong>{{ item.title }}</strong>
+            <small>{{ item.addDate | date }}</small>
             <br>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+            <small><a :href="item.url">{{ item.url }}</a></small>
+            <br>
+            {{ item.description }}
           </p>
         </div>
 
@@ -27,15 +28,16 @@
                 <a class="level-item" @click="deleteItem">
                   <span class="icon is-small"><i class="fa fa-trash-o"></i></span>
                 </a>
+                <router-link class="level-item" title="Permalink" :to="{ name: 'Item', params: { id: item.id }}">
+                  <span class="icon is-small"><i class="fa fa-link"></i></span>
+                </router-link>
               </div>
             </nav>
           </div>
 
           <div class="column">
             <div class="tags">
-              <span class="tag">One</span>
-              <span class="tag">Two</span>
-              <span class="tag">Three</span>
+              <span v-for="tag in item.tags" class="tag">{{ tag }}</span>
             </div>
           </div>
         </div>
@@ -45,26 +47,32 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import * as types from '@/store/mutation-types'
 
   export default {
     name: 'item',
     props: ['id'],
     computed: {
-      ...mapState(['items'])
-    },
-    mounted () {
-      console.log(this.items[this.id])
+      item () {
+        return this.$store.getters.getItemById(this.id)
+      }
     },
     methods: {
       editItem () {
-        this.$router.push({path: '/item-form', query: {id: 'test'}})
+        this.$router.push({path: '/item-form', query: {id: this.item.id}})
       },
       deleteItem () {
         let canDelete = confirm('Are you sure you want to delete this link?')
         if (canDelete) {
-          console.log('Item deleted')
+          this.$store.commit(types.DELETE_ITEM, this.item.id)
         }
+      }
+    },
+    filters: {
+      date: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.replace(new RegExp('-', 'g'), '/').replace('T', ' ')
       }
     }
   }

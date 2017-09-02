@@ -1,6 +1,6 @@
 <template>
   <div class="c-items">
-    <item v-for="(item, key)  in items" :key="item.id"></item>
+    <item v-for="(item, key) in items" :key="item.id" :id="item.id"></item>
   </div>
 </template>
 
@@ -10,9 +10,7 @@
 
   export default {
     name: 'items',
-    components: {
-      Item
-    },
+    components: {Item},
     computed: mapState(['items'])
   }
 </script>

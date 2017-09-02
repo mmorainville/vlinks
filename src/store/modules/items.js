@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import * as types from '../mutation-types'
 
 const state = {
@@ -12,7 +13,7 @@ const state = {
   },
   'bla': {
     id: 'bla',
-    title: 'Item #1',
+    title: 'Item #2',
     url: 'https://example.com',
     description: 'Description',
     tags: ['test'],
@@ -21,7 +22,7 @@ const state = {
   },
   'test2': {
     id: 'test2',
-    title: 'Item #1',
+    title: 'Item #3',
     url: 'https://example.com',
     description: 'Description',
     tags: ['test'],
@@ -35,7 +36,7 @@ const mutations = {
     state[item.id] = item
   },
   [types.DELETE_ITEM] (state, id) {
-    delete state[id]
+    Vue.delete(state, id)
   }
 }
 
