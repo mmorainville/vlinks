@@ -1,12 +1,14 @@
 import Dropbox from 'dropbox'
 import store from '@/store'
 
+const dbPath = '/db.' + (process.env.NODE_ENV !== 'production' ? 'dev' : 'prod') + '.json'
+
 export let dropbox = new Dropbox({accessToken: process.env.DROPBOX_ACCESS_TOKEN})
 
 export let actions = {
   upload () {
     dropbox.filesUpload({
-      path: '/db.dev.json',
+      path: dbPath,
       contents: JSON.stringify(store.state.items.all, null, 2),
       mode: {
         '.tag': 'overwrite'
@@ -20,7 +22,7 @@ export let actions = {
       })
   },
   download () {
-    dropbox.filesDownload({path: '/db.dev.json'})
+    dropbox.filesDownload({path: dbPath})
       .then((response) => {
         let blob = response.fileBlob
         let reader = new FileReader()

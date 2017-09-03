@@ -32,13 +32,15 @@
 </template>
 
 <script>
+  const baseUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')
+
   export default {
     name: 'navbar',
     data () {
       return {
         bookmarklet: `(function(){var%20url%20=%20location.href;
         var%20title%20=%20document.title%20||%20url;
-        window.open('http://localhost:8080/item-form?url='%20+%20encodeURIComponent(url)+'&title='%20+%20encodeURIComponent(title),'_blank','height=600,width=800');})();`
+        window.open('${baseUrl}/item-form?url='%20+%20encodeURIComponent(url)+'&title='%20+%20encodeURIComponent(title),'_blank','height=600,width=800');})();`
       }
     }
   }
