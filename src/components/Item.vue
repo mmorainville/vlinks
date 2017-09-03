@@ -47,8 +47,6 @@
 </template>
 
 <script>
-  import * as types from '@/store/mutation-types'
-
   export default {
     name: 'item',
     props: ['id'],
@@ -64,7 +62,7 @@
       deleteItem () {
         let canDelete = confirm('Are you sure you want to delete this link?')
         if (canDelete) {
-          this.$store.commit(types.DELETE_ITEM, this.item.id)
+          this.$store.dispatch('deleteItem', this.item.id)
         }
       }
     },

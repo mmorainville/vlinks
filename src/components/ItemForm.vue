@@ -74,7 +74,6 @@
 
 <script>
   import { mapState } from 'vuex'
-  import * as types from '@/store/mutation-types'
 
   const uuidv4 = require('uuid/v4')
 
@@ -83,7 +82,9 @@
   export default {
     name: 'item-form',
     computed: {
-      ...mapState(['items'])
+      ...mapState({
+        items: state => state.items.all
+      })
     },
     data () {
       return {
@@ -117,8 +118,7 @@
         }
       },
       saveItem () {
-        this.$store.commit(types.SAVE_ITEM, this.item)
-        this.$router.push('/')
+        this.$store.dispatch('saveItem', this.item)
       }
     }
   }

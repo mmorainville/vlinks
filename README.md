@@ -1,6 +1,6 @@
-# vlinks
+# Vlinks
 
-> A Vue.js project
+> A Shaarli alternative which doesn't need any backend or database. It uses Dropbox to save/restore the data.
 
 ## Build Setup
 

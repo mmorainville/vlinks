@@ -11,6 +11,8 @@
   export default {
     name: 'items',
     components: {Item},
-    computed: mapState(['items'])
+    computed: mapState({
+      items: state => state.items.all
+    })
   }
 </script>

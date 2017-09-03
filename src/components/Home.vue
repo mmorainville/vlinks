@@ -13,12 +13,16 @@
 <script>
   import Navbar from './Navbar.vue'
   import Items from './Items.vue'
+  import {actions} from '@/shared/dropbox'
 
   export default {
     name: 'home',
     components: {
       Items,
       Navbar
+    },
+    mounted () {
+      actions.download()
     }
   }
 </script>

@@ -2,41 +2,28 @@ import Vue from 'vue'
 import * as types from '../mutation-types'
 
 const state = {
-  'test': {
-    id: 'test',
-    title: 'Item #1',
-    url: 'https://example.com',
-    description: 'Description',
-    tags: ['test'],
-    isPrivate: false,
-    addDate: '2017-08-31T02:10'
-  },
-  'bla': {
-    id: 'bla',
-    title: 'Item #2',
-    url: 'https://example.com',
-    description: 'Description',
-    tags: ['test'],
-    isPrivate: false,
-    addDate: '2017-08-31T02:10'
-  },
-  'test2': {
-    id: 'test2',
-    title: 'Item #3',
-    url: 'https://example.com',
-    description: 'Description',
-    tags: ['test'],
-    isPrivate: false,
-    addDate: '2017-08-31T02:10'
+  all: {
+    'test': {
+      id: 'test',
+      title: 'Item #1',
+      url: 'https://example.com',
+      description: 'Description',
+      tags: ['test'],
+      isPrivate: false,
+      addDate: '2017-08-31T02:10'
+    }
   }
 }
 
 const mutations = {
+  [types.LOAD_ITEMS] (state, items) {
+    state.all = Object.assign({}, items)
+  },
   [types.SAVE_ITEM] (state, item) {
-    state[item.id] = item
+    state.all[item.id] = item
   },
   [types.DELETE_ITEM] (state, id) {
-    Vue.delete(state, id)
+    Vue.delete(state.all, id)
   }
 }
 
