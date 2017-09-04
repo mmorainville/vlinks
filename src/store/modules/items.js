@@ -2,17 +2,7 @@ import Vue from 'vue'
 import * as types from '../mutation-types'
 
 const state = {
-  all: {
-    'test': {
-      id: 'test',
-      title: 'Item #1',
-      url: 'https://example.com',
-      description: 'Description',
-      tags: ['test'],
-      isPrivate: false,
-      addDate: '2017-08-31T02:10'
-    }
-  }
+  all: {}
 }
 
 const mutations = {

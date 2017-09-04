@@ -109,6 +109,7 @@
       addTag () {
         if (this.tag && this.item.tags.indexOf(this.tag) === -1) {
           this.item.tags.push(this.tag)
+          this.tag = ''
         }
       },
       removeTag (tag) {
