@@ -6,14 +6,14 @@
           <img src="../assets/logo.png" alt="Vue.js PWA">
         </router-link>
 
-        <div class="navbar-burger burger" data-target="c-navbar__menu">
+        <div class="navbar-burger burger" data-target="c-navbar__menu" ref="c-navbar__burger" @click="toggleMenu">
           <span></span>
           <span></span>
           <span></span>
         </div>
       </div>
 
-      <div id="c-navbar__menu" class="navbar-menu">
+      <div id="c-navbar__menu" ref="c-navbar__menu" class="navbar-menu">
         <div class="navbar-start">
           <router-link v-if="isAuthenticated" class="navbar-item" to="/item-form" exact>
             Add link
@@ -76,6 +76,18 @@
       },
       logout () {
         this.$store.commit('LOGOUT')
+      },
+      toggleMenu () {
+        let toggleButton = this.$refs['c-navbar__burger']
+        let menu = this.$refs['c-navbar__menu']
+
+        if (toggleButton.classList.contains('is-active')) {
+          toggleButton.classList.remove('is-active')
+          menu.classList.remove('is-active')
+        } else {
+          toggleButton.classList.add('is-active')
+          menu.classList.add('is-active')
+        }
       }
     }
   }

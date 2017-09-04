@@ -28,7 +28,7 @@ export default new Router({
             if (store.state.auth.isAuthenticated) {
               next()
             } else {
-              next(false)
+              next('/')
             }
           }
         },
