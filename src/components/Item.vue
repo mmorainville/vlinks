@@ -22,10 +22,10 @@
           <div class="column is-narrow">
             <nav class="level is-mobile" style="height: 100%">
               <div class="level-left">
-                <a class="level-item" @click="editItem">
+                <a v-if="isAuthenticated" class="level-item" @click="editItem">
                   <span class="icon is-small"><i class="fa fa-pencil"></i></span>
                 </a>
-                <a class="level-item" @click="deleteItem">
+                <a v-if="isAuthenticated" class="level-item" @click="deleteItem">
                   <span class="icon is-small"><i class="fa fa-trash-o"></i></span>
                 </a>
                 <router-link class="level-item" title="Permalink" :to="{ name: 'Item', params: { id: item.id }}">
@@ -47,13 +47,18 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'item',
     props: ['id'],
     computed: {
       item () {
         return this.$store.getters.getItemById(this.id)
-      }
+      },
+      ...mapState({
+        isAuthenticated: state => state.auth.isAuthenticated
+      })
     },
     methods: {
       editItem () {

@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Items from '@/components/Items'
 import ItemForm from '@/components/ItemForm'
 import Item from '@/components/Item'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -22,7 +23,14 @@ export default new Router({
         {
           path: '/item-form',
           name: 'ItemForm',
-          component: ItemForm
+          component: ItemForm,
+          beforeEnter: (to, from, next) => {
+            if (store.state.auth.isAuthenticated) {
+              next()
+            } else {
+              next(false)
+            }
+          }
         },
         {
           path: '/item/:id',

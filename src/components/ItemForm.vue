@@ -65,7 +65,7 @@
           <button class="button is-primary" @click="saveItem">Submit</button>
         </div>
         <div class="control">
-          <button class="button is-link">Cancel</button>
+          <router-link class="button is-link" to="/" exact>Cancel</router-link>
         </div>
       </div>
     </div>
