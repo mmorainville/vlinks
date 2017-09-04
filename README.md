@@ -2,6 +2,8 @@
 
 > A Shaarli alternative which doesn't need any backend or database. It uses Dropbox to save/restore the data.
 
+[![Vlinks](./screenshot.png "Vlinks")](https://github.com/mmorainville/vlinks)
+
 ## Build Setup
 
 ``` bash
