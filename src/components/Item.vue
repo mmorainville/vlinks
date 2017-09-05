@@ -37,7 +37,7 @@
 
           <div class="column">
             <div class="tags">
-              <span v-for="tag in item.tags" class="tag">{{ tag }}</span>
+              <a v-for="tag in item.tags" class="tag" @click="addTag(tag)">{{ tag }}</a>
             </div>
           </div>
         </div>
@@ -58,7 +58,10 @@
       },
       ...mapState({
         isAuthenticated: state => state.auth.isAuthenticated
-      })
+      }),
+      tags () {
+        return this.$store.state.filters.tags
+      }
     },
     methods: {
       editItem () {
@@ -68,6 +71,13 @@
         let canDelete = confirm('Are you sure you want to delete this link?')
         if (canDelete) {
           this.$store.dispatch('deleteItem', this.item.id)
+        }
+      },
+      addTag (tag) {
+        if (tag && this.tags.indexOf(tag) === -1) {
+          let newTags = this.tags.slice()
+          newTags.push(tag)
+          this.$store.commit('UPDATE_FILTERS', {tags: newTags})
         }
       }
     },
