@@ -14,9 +14,17 @@
               </p>
             </div>
             <div class="field">
-              <p class="control">
+              <!--<p class="control">
                 <input class="input" v-model="tag" @keyup.enter="addTag" type="text" placeholder="By tag">
-              </p>
+
+                <nav v-if="showTypeaheadResults" class="c-typeahead__results panel">
+                  <a class="panel-block" v-for="tag in existingFilteredTags" @click="addTag(tag)">
+                    {{ tag }}
+                  </a>
+                </nav>
+              </p>-->
+
+              <typeahead v-model="tag" :on-submit="addTag" :show-results="showTypeaheadResults" :existing-values="existingFilteredTags" :placeholder="'By tag'"></typeahead>
             </div>
           </div>
         </div>
@@ -36,8 +44,14 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+  import Typeahead from './Typeahead.vue'
+
   export default {
     name: 'filters',
+    components: {
+      Typeahead
+    },
     data () {
       return {
         tag: '',
@@ -51,10 +65,23 @@
       },
       tags () {
         return this.$store.state.filters.tags
+      },
+      ...mapGetters({
+        existingTags: 'getExistingTags'
+      }),
+      existingFilteredTags () {
+        return this.existingTags().filter((element) => element.toLowerCase().includes(this.tag.toLowerCase()))
+      },
+      showTypeaheadResults () {
+        return this.tag && this.existingFilteredTags.length > 0
       }
     },
     methods: {
-      addTag () {
+      addTag (tag) {
+        if (tag) {
+          this.tag = tag
+        }
+
         if (this.tag && this.tags.indexOf(this.tag) === -1) {
           let newTags = this.tags.slice()
           newTags.push(this.tag)

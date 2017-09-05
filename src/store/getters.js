@@ -21,3 +21,15 @@ export const getItemsAsArray = (state, getters) => () => {
 export const getItemById = (state, getters) => (id) => {
   return state.items.all[id]
 }
+
+export const getExistingTags = (state, getters) => () => {
+  let existingTags = []
+
+  for (let id in state.items.all) {
+    for (let tag of state.items.all[id].tags) {
+      existingTags.push(tag)
+    }
+  }
+
+  return existingTags
+}
