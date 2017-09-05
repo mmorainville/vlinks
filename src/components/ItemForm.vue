@@ -32,9 +32,7 @@
       </div>
 
       <div class="field has-addons">
-        <p class="control">
-          <input class="input" v-model="tag" @keyup.enter="addTag" type="text" placeholder="Tag">
-        </p>
+        <typeahead v-model="tag" :on-submit="addTag" :show-results="showTypeaheadResults" :existing-values="existingFilteredTags" :placeholder="'Tag'"></typeahead>
         <p class="control">
           <a class="button" @click="addTag">
             Add tag
@@ -73,18 +71,29 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
+  import Typeahead from './Typeahead.vue'
 
   const uuidv4 = require('uuid/v4')
 
   let timezoneOffset = (new Date()).getTimezoneOffset() * 60000
 
   export default {
+    components: {Typeahead},
     name: 'item-form',
     computed: {
       ...mapState({
         items: state => state.items.all
-      })
+      }),
+      ...mapGetters({
+        existingTags: 'getExistingTags'
+      }),
+      existingFilteredTags () {
+        return this.existingTags().filter((element) => element.toLowerCase().includes(this.tag.toLowerCase()))
+      },
+      showTypeaheadResults () {
+        return this.tag && this.existingFilteredTags.length > 0
+      }
     },
     data () {
       return {
