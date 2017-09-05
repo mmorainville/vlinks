@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/mmorainville/vlinks/compare/v1.1.0...v1.2.0) (2017-09-05)
+
+
+### Features
+
+* add a Typeahead component ([f2d0242](https://github.com/mmorainville/vlinks/commit/f2d0242))
+* add the Typeahead component in the ItemForm component ([4c0e4e8](https://github.com/mmorainville/vlinks/commit/4c0e4e8))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/mmorainville/vlinks/compare/v1.0.0...v1.1.0) (2017-09-04)
 
