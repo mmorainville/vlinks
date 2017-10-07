@@ -6,14 +6,14 @@
           <img src="../assets/logo.png" alt="Vue.js PWA">
         </router-link>
 
-        <div class="navbar-burger burger" data-target="c-navbar__menu" ref="c-navbar__burger" @click="toggleMenu">
+        <div class="navbar-burger burger" :class="{ 'is-active': isNavbarOpen }" @click="toggleNavbar">
           <span></span>
           <span></span>
           <span></span>
         </div>
       </div>
 
-      <div id="c-navbar__menu" ref="c-navbar__menu" class="navbar-menu">
+      <div class="navbar-menu" :class="{ 'is-active': isNavbarOpen }">
         <div class="navbar-start">
           <router-link v-if="isAuthenticated" class="navbar-item" to="/item-form" exact>
             Add link
@@ -67,7 +67,8 @@
         bookmarklet: `(function(){var%20url%20=%20location.href;
         var%20title%20=%20document.title%20||%20url;
         window.open('${baseUrl}/item-form?url='%20+%20encodeURIComponent(url)+'&title='%20+%20encodeURIComponent(title),'_blank','height=600,width=800');})();`,
-        token: ''
+        token: '',
+        isNavbarOpen: false
       }
     },
     methods: {
@@ -77,17 +78,8 @@
       logout () {
         this.$store.commit('LOGOUT')
       },
-      toggleMenu () {
-        let toggleButton = this.$refs['c-navbar__burger']
-        let menu = this.$refs['c-navbar__menu']
-
-        if (toggleButton.classList.contains('is-active')) {
-          toggleButton.classList.remove('is-active')
-          menu.classList.remove('is-active')
-        } else {
-          toggleButton.classList.add('is-active')
-          menu.classList.add('is-active')
-        }
+      toggleNavbar () {
+        this.isNavbarOpen = !this.isNavbarOpen
       }
     }
   }
